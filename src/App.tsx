@@ -20,9 +20,20 @@ function App() {
         }
     }
 
+    const [letter, setLetter] = useState<string>("");
+    const generateLetter = () => {
+        const alphabet = "abcdefghijklmnopqrstuvwxyz";
+        const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+        const anotherRandomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+        setLetter(`${randomLetter}${anotherRandomLetter}`);
+    }
+
+
     useEffect(() => {
         if (arrayOfSix.length !== 6) {
             generateArray();
+            generateLetter();
         }
     }, []);
 
@@ -32,21 +43,17 @@ function App() {
     }, [arrayOfSix]);
 
     return (
-        <div className={`w-screen h-screen`} onClick={() => {
+        <div
+            className={`bg-yellow-300 flex items-center justify-center max-h-screen overflow-clip`} onClick={() => {
             setShowPattern(!showPattern)
         }}>
             {showPattern ? <>
-                <div className={`w-screen h-screen grid grid-cols-3 grid-rows-2`}>
-                    {arrayOfSix.map((item, index) => {
-                        return (
-                            <div key={index}
-                                 className={`w-full h-full ${item === "1" ? "bg-black" : "bg-white"}`}>.</div>
-                        )
-                    })}
-                </div>
+                <p className={`text-[1650px] uppercase`}>
+                    {letter}
+                </p>
             </> : <>
                 <div className={`w-screen h-screen`}
-                 style={{backgroundColor: backGroundColor}}
+                     style={{backgroundColor: backGroundColor}}
                 >
 
                 </div>
